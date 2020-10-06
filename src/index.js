@@ -43,14 +43,17 @@ function decode(expr) {
         counter = 1;
 
     expr.split('').forEach(ch => {
-        if(currentWord.length > 0 || ch != '0') currentWord += ch;
+        if(currentWord.length > 0 || ch != '0') currentWord += ch; // Skip left zeroes
+
         if (counter == 10) {
-            //decode to Morse
+            // Decode to Morse code
             currentWord = currentWord.split('10').join('.');
             currentWord = currentWord.split('11').join('-');
             currentWord = currentWord.replace('**********', ' ');
 
+            // Decode from Morse code
             result += ((currentWord != ' ') ? MORSE_TABLE[currentWord]: ' ');
+            
             currentWord = '';
             counter = 0;
         }
